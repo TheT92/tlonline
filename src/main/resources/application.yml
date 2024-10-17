@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: tlonline
+  datasource:
+    url: jdbc:mysql://localhost:3306/tlonline?characterEncoding=UTF-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: always
+      # data-location: classpath:sql/config-data.sql
+      # schema-location: classpath:sql/config-schema.sql
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
