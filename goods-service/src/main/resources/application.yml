@@ -1,5 +1,5 @@
 server:
-  port: 8083
+  port: 8082
 
 spring:
   application:
@@ -11,9 +11,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   sql:
     init:
-      mode: always
-      # data-location: classpath:sql/config-data.sql
-      # schema-location: classpath:sql/config-schema.sql
+      mode: embedded
   jpa:
     hibernate:
       ddl-auto: update

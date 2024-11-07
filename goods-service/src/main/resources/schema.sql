@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS `goods` (`id` int NOT NULL AUTO_INCREMENT,`del_flag` int DEFAULT NULL,`state` int DEFAULT NULL,`name` varchar(255) DEFAULT NULL,`desc` varchar(255) DEFAULT NULL,`uuid` binary(16) DEFAULT NULL,PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;

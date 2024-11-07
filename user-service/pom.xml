@@ -17,6 +17,16 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
+        <dependency>
+            <!-- 这个包不要放根目录，网关服务不需要连数据库，会导致网关启动失败 -->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.33</version> <!-- 请根据需要选择合适的版本 -->
+		</dependency>
         <!-- <dependency>
             <groupId>com.tl</groupId>
             <artifactId>auth-service</artifactId>
