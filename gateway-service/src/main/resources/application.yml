@@ -7,10 +7,22 @@ spring:
   cloud:
     gateway:
       routes:
+        - id: user-service-signup
+          uri: http://localhost:8081
+          predicates:
+            - Path=/user/signup
+        - id: user-service-login
+          uri: http://localhost:8081
+          predicates:
+            - Path=/user/login
         - id: user-service
           uri: http://localhost:8081
           predicates:
             - Path=/user/**
+          filters: 
+            # filters在这里代表请求会走JwtAuthFilter这个拦截过滤器，会验证token，
+            # 如果user-service中部分接口不验证token，就使用细化路径匹配
+            - name: JwtAuthFilter
         - id: goods-service
           uri: http://localhost:8082
           predicates:

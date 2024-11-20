@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tl.common.utils.ApiResponse;
 import com.tl.user.model.User;
-import com.tl.user.service.ApiResponse;
 import com.tl.user.service.UserService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 
 @RestController
@@ -34,7 +35,13 @@ public class UserController {
         return new ResponseEntity<>(response, HttpStatus.valueOf(response.getStatus()));
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/userInfo")
+    public ResponseEntity<ApiResponse<User>> getUserInfoByToken(@RequestHeader("X-User-ID") String userId ) {
+        ApiResponse<User> response = userService.getUserInfo(userId);
+        return new ResponseEntity<>(response, HttpStatus.valueOf(response.getStatus()));
+    }
+
+    @GetMapping("/userInfo/{id}")
     public ResponseEntity<ApiResponse<User>> getUserInfo(@PathVariable String id) {
         ApiResponse<User> response = userService.getUserInfo(id);
         return new ResponseEntity<>(response, HttpStatus.valueOf(response.getStatus()));

@@ -86,9 +86,8 @@
 		</plugins>
 	</build>
 	<modules>
-		<module>gateway-service</module>
 		<module>common</module>
-		<module>auth-service</module>
+		<module>gateway-service</module>
 		<module>user-service</module>
 		<module>order-service</module>
 		<module>goods-service</module>

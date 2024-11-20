@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.tl.user.model.User;
+import com.tl.common.utils.ApiResponse;
+import com.tl.common.utils.JwtUtils;
 import com.tl.user.dao.UserDao;
 import com.tl.user.entity.UserEntity;
 import com.tl.user.entity.UserFactory;
@@ -26,7 +28,7 @@ public class UserService {
             UserEntity userEntity = this.modelToEntity(user);
             UserFactory.setDefaultFields(userEntity);
             userDao.save(userEntity);
-            return ApiResponse.error(HttpStatus.UNAUTHORIZED.value(), "Unauthorized");
+            return ApiResponse.success("OK");
         } catch (Exception e) {
             return ApiResponse.error(HttpStatus.EXPECTATION_FAILED.value(), "Exception");
         }
@@ -39,10 +41,13 @@ public class UserService {
      */
     public ApiResponse<String> login(User user) {
         try {
-            UserEntity userEntity = this.modelToEntity(user);
-            UserFactory.setDefaultFields(userEntity);
-            userDao.save(userEntity);
-            return ApiResponse.error(HttpStatus.UNAUTHORIZED.value(), "Unauthorized");
+            UserEntity userEntity = userDao.findByAccountAndPassword(user.getAccount(), user.getPassword());
+            if(userEntity == null) {
+                return ApiResponse.error(HttpStatus.EXPECTATION_FAILED.value(), "Can not find user");
+            } else {
+                String token = JwtUtils.generateToken(userEntity.getId().toString());
+                return ApiResponse.success(token);
+            }
         } catch (Exception e) {
             return ApiResponse.error(HttpStatus.EXPECTATION_FAILED.value(), "Exception");
         }

@@ -16,7 +16,8 @@ spring:
       # schema-location: classpath:sql/config-schema.sql
   jpa:
     hibernate:
-      ddl-auto: update
+      # update代表entity更新时会更新数据库表，none表示交给开发者处理表创建等工作，hibernate不处理
+      ddl-auto: update 
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect

@@ -3,12 +3,13 @@ package com.tl.gateway.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.reactive.function.client.WebClient;
+
+import com.tl.gateway.component.JwtAuthFilter;
 
 @Configuration
 public class GatewayConfig {
     @Bean
-    public WebClient.Builder webClientBuilder() {
-        return WebClient.builder();
+    public JwtAuthFilter jwtAuthFilter() {
+        return new JwtAuthFilter();
     }
 }

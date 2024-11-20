@@ -7,5 +7,5 @@ import com.tl.user.entity.UserEntity;
 
 @Repository
 public interface UserDao extends JpaRepository<UserEntity, Integer> {
-    
+    public UserEntity findByAccountAndPassword(String account, String password);
 }
