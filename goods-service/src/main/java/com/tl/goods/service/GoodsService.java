@@ -1,6 +1,8 @@
 package com.tl.goods.service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,15 @@ public class GoodsService {
         try {
             List<Goods> list = goodsDao.findAll().stream().map(a -> entityToModel(a)).collect(Collectors.toList());
             return ApiResponse.success(list);
+        } catch(Exception e) {
+            return ApiResponse.error(HttpStatus.EXPECTATION_FAILED.value());
+        }
+    }
+
+    public ApiResponse<Goods> getGoodsDetailByUuid(String uuid) {
+        try {
+            Optional<GoodsEntity> optionalEntity = goodsDao.findByUuid(UUID.fromString(uuid));
+            return ApiResponse.success(entityToModel(optionalEntity.get()));
         } catch(Exception e) {
             return ApiResponse.error(HttpStatus.EXPECTATION_FAILED.value());
         }

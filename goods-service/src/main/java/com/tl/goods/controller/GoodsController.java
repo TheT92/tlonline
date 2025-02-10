@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,9 +26,15 @@ public class GoodsController {
         return "Hello, Goods!";
     }
 
-    @GetMapping("/homepageGoods")
-    public ResponseEntity<ApiResponse<List<Goods>>> getMethodName() {
+    @GetMapping("/home")
+    public ResponseEntity<ApiResponse<List<Goods>>> getHomepageGoods() {
         ApiResponse<List<Goods>> response = goodsService.getHomepageGoods();
+        return new ResponseEntity<>(response, HttpStatus.valueOf(response.getStatus()));
+    }
+
+    @GetMapping("/detail/{uuid}")
+    public ResponseEntity<ApiResponse<Goods>> getGoodsDetailByUuid(@PathVariable("uuid") String uuid) {
+        ApiResponse<Goods> response = goodsService.getGoodsDetailByUuid(uuid);
         return new ResponseEntity<>(response, HttpStatus.valueOf(response.getStatus()));
     }
     

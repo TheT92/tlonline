@@ -14,11 +14,6 @@
 
     <build>
         <plugins>
-            <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt-api</artifactId>
-                <version>0.11.5</version>
-            </dependency>    
             <plugin>
                 <!-- 这里用来保证common包可以注入其它模块， mvn clean install可以顺利执行 -->
                 <groupId>org.springframework.boot</groupId>

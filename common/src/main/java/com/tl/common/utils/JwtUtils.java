@@ -14,8 +14,8 @@ public class JwtUtils {
     // 生成一个随机密钥（推荐在项目启动时加载固定密钥）
     private static final SecretKey SECRET_KEY = Keys.hmacShaKeyFor("QWERTYASDFGHZXCVBNMPOIULKJ1236547890abcdefghijklmnopqrstuvwxyz!@#$%^&*()".getBytes(StandardCharsets.UTF_8));
 
-    // Token 有效期：10分钟
-    private static final long EXPIRATION_TIME = 10 * 60 * 1000;
+    // Token 有效期：12小时
+    private static final long EXPIRATION_TIME = 12 * 60 * 60 * 1000;
 
     /**
      * 生成 JWT Token

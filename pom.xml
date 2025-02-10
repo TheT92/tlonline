@@ -91,5 +91,7 @@
 		<module>user-service</module>
 		<module>order-service</module>
 		<module>goods-service</module>
+		<module>cart-service</module>
+		<module>admin-service</module>
 	</modules>
 </project>

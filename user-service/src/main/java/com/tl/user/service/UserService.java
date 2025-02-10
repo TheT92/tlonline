@@ -1,10 +1,13 @@
 package com.tl.user.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.tl.user.model.User;
+import com.tl.user.model.UserInfo;
 import com.tl.common.utils.ApiResponse;
 import com.tl.common.utils.JwtUtils;
 import com.tl.user.dao.UserDao;
@@ -58,11 +61,10 @@ public class UserService {
      * @param id
      * @return
      */
-    public ApiResponse<User> getUserInfo(String id) {
+    public ApiResponse<UserInfo> getUserInfo(String id) {
         try {
-            UserEntity userEntity = new UserEntity();
-            userEntity.setFirstName("Jack");
-            return ApiResponse.success(this.entityToModel(userEntity));
+            Optional<UserEntity> optionalEntity = userDao.findById(Integer.parseInt(id));
+            return ApiResponse.success(this.entityToUserInfo(optionalEntity.get()));
         } catch (Exception e) {
             return ApiResponse.error(HttpStatus.EXPECTATION_FAILED.value(), "Exception");
         }
@@ -74,5 +76,9 @@ public class UserService {
 
     private User entityToModel(UserEntity userEntity) {
         return new User(userEntity.getId(), userEntity.getUuid(), userEntity.getAccount(), userEntity.getPassword(), userEntity.getFirstName(), userEntity.getLastName(), userEntity.getEmail(), userEntity.getDelFlag());
+    }
+
+    private UserInfo entityToUserInfo(UserEntity userEntity) {
+        return new UserInfo(userEntity.getUuid().toString(), userEntity.getAccount(), userEntity.getFirstName(), userEntity.getLastName(), userEntity.getEmail());
     }
 }
